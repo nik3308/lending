@@ -1,0 +1,12 @@
+# General
+.DS_Store
+Thumbs.db
+
+# Node modules (if you ever decide to use npm packages)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE specific
+.idea/
+.vscode/
