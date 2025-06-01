@@ -17,7 +17,9 @@ function toggleFaq(element) {
 // Demo Chat
 function toggleChat() {
     const chat = document.getElementById('demoChat');
-    chat.style.display = chat.style.display === 'none' ? 'block' : 'none';
+    if (chat) { // Ensure chat element exists
+        chat.style.display = chat.style.display === 'none' ? 'block' : 'none';
+    }
 }
 
 function selectOption(option) {
@@ -89,7 +91,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
-        if (targetId && targetId.length > 1) { // Ensure href is not just "#"
+        if (targetId && targetId.length > 1) { 
              const target = document.querySelector(targetId);
              if (target) {
                 target.scrollIntoView({
@@ -102,21 +104,42 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Form submission
-const mainForm = document.querySelector('section.final-cta form'); // More specific selector
+const mainForm = document.querySelector('section.final-cta form');
 if (mainForm) {
     mainForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default browser submission
         
         const nameInput = this.querySelector('input[type="text"]');
         const phoneInput = this.querySelector('input[type="tel"]');
-        const businessSelect = this.querySelector('select'); // Assuming the first select is business
-        
-        if (nameInput && phoneInput && businessSelect) {
+        const businessSelect = this.elements['Сфера бизнеса'] || this.querySelector('select[required]'); // More robust selector for business sphere
+        const clientVolumeSelect = this.elements['Обращений клиентов в день'] || this.querySelector('select:not([required])'); // More robust selector for client volume
+
+        if (nameInput && phoneInput && businessSelect) { // ClientVolumeSelect is optional
             const name = nameInput.value;
             const phone = phoneInput.value;
             const business = businessSelect.value;
+            const clientVolume = clientVolumeSelect ? clientVolumeSelect.value : ""; // Handle if not found
 
-            if (name && phone && business) {
+            if (name.trim() && phone.trim() && business) { 
+                
+                // IMPORTANT: GitHub Pages hosts static sites and cannot process form data or send emails directly.
+                // The data below is collected but NOT actually sent to nik3308@yandex.ru by this script.
+                // You need to use a third-party service like Formspree (formspree.io), Netlify Forms,
+                // or a custom backend to handle form submissions and send emails.
+
+                const formData = {
+                    name: name,
+                    phone: phone,
+                    businessSphere: business,
+                    clientVolumePerDay: clientVolume,
+                    submittedAt: new Date().toISOString()
+                };
+
+                // For your testing, you can see the data in the browser's console:
+                console.log("Form data submitted (simulation):", formData);
+                console.log("This data would ideally be sent to: nik3308@yandex.ru via a backend service.");
+
+                // Simulate form submission for UI
                 const button = this.querySelector('button[type="submit"]');
                 const originalText = button.innerHTML;
                 
@@ -127,25 +150,32 @@ if (mainForm) {
                     button.innerHTML = '✅ Заявка отправлена!';
                     button.style.background = '#28a745';
                     
-                    const successMsgContainer = document.createElement('div'); // Container for message
+                    const successMsgContainer = document.createElement('div'); 
                     successMsgContainer.innerHTML = `
                         <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; margin-top: 20px; text-align: center;" class="success-message">
                             <h4>🎉 Спасибо за заявку, ${name}!</h4>
-                            <p>Наш менеджер свяжется с вами в течение 15 минут и проведет бесплатную консультацию по телефону ${phone}.</p>
-                            <p><strong>А пока можете посмотреть примеры наших работ в WhatsApp: +7 (495) 123-45-67</strong></p>
+                            <p>Наш менеджер свяжется с вами в течение 15 минут.</p>
+                            <p style="font-size:0.9em; margin-top:10px;"><strong>(Данные формы выведены в консоль браузера для демонстрации. Для реальной отправки на nik3308@yandex.ru настройте сторонний сервис обработки форм, например Formspree.io)</strong></p>
                         </div>
                     `;
-                    this.appendChild(successMsgContainer); // Append the container
+                    this.appendChild(successMsgContainer); 
                     
                     setTimeout(() => {
                         this.reset();
                         button.innerHTML = originalText;
-                        button.style.background = '#ff6b6b'; // Assuming this is the original color
+                        button.style.background = '#ff6b6b'; 
                         button.disabled = false;
-                        successMsgContainer.remove();
+                        if(successMsgContainer.parentNode) { // Check if still child before removing
+                           successMsgContainer.remove();
+                        }
                     }, 10000);
                 }, 2000);
+            } else {
+                alert("Пожалуйста, заполните все обязательные поля: Имя, Телефон и Сфера бизнеса.");
             }
+        } else {
+            console.error("Не удалось найти все элементы формы. Проверьте селекторы для полей 'Сфера бизнеса' или 'Обращений клиентов в день'.");
+            alert("Ошибка в настройке формы. Пожалуйста, свяжитесь с нами другим способом.");
         }
     });
 }
@@ -157,39 +187,52 @@ const observerOptions = {
     rootMargin: '0px 0px -50px 0px'
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target); // Unobserve after animation
-        }
-    });
-}, observerOptions);
+let observerInstance = null; // Keep a reference to the observer
 
-document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.benefit-card, .stat-card, .type-card, .case-card, .price-card, .process-step');
+function initializeObserver() {
+    if (observerInstance) {
+        observerInstance.disconnect(); // Disconnect previous observer if any
+    }
+    observerInstance = new IntersectionObserver((entries, obs) => { // obs is the observer itself
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                obs.unobserve(entry.target); // Use the 'obs' parameter to unobserve
+            }
+        });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.benefit-card, .stat-card, .type-card, .price-card, .process-step'); // Removed .case-card
     
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.6s ease-out';
-        observer.observe(el);
+        observerInstance.observe(el);
     });
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    initializeObserver(); // Initialize observer on DOM load
 
     // Counter animation for statistics
-    function animateCounter(element, target, duration = 2000) {
+    function animateCounter(element, targetValue, duration = 2000) {
         let start = 0;
-        const isPercentage = element.textContent.includes('%');
-        const cleanTarget = parseInt(String(target).replace(/[^\d]/g, ''));
+        const isPercentage = String(targetValue).includes('%');
+        const cleanTarget = parseInt(String(targetValue).replace(/[^\d]/g, ''));
 
         if (isNaN(cleanTarget)) return;
 
-        const increment = cleanTarget / (duration / 16);
+        const increment = cleanTarget / (duration / 16); // 16ms per frame approx (60fps)
+        let currentFrame = 0;
+        const totalFrames = duration / 16;
         
         function updateCounter() {
             start += increment;
-            if (start < cleanTarget) {
+            currentFrame++;
+            if (currentFrame < totalFrames && start < cleanTarget) {
                 element.textContent = Math.floor(start) + (isPercentage ? '%' : '');
                 requestAnimationFrame(updateCounter);
             } else {
@@ -199,32 +242,47 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCounter();
     }
 
-    const statNumbers = document.querySelectorAll('.stat-number, .case-stat-number');
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
-                const targetText = entry.target.textContent;
-                entry.target.classList.add('animated'); // Add class before starting animation
-                animateCounter(entry.target, targetText);
-                statsObserver.unobserve(entry.target); // Unobserve after animation
-            }
-        });
-    }, { threshold: 0.5 }); // Trigger when 50% visible
+    let statsObserverInstance = null; // Keep a reference to the stats observer
 
-    statNumbers.forEach(stat => {
-        if (stat) statsObserver.observe(stat);
-    });
+    function initializeStatsObserver() {
+        if (statsObserverInstance) {
+            statsObserverInstance.disconnect();
+        }
+        statsObserverInstance = new IntersectionObserver((entries, obs) => { // obs is the observer itself
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                    const targetText = entry.target.textContent;
+                    entry.target.classList.add('animated'); 
+                    animateCounter(entry.target, targetText);
+                    obs.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.5 }); 
+
+        const statNumbers = document.querySelectorAll('.stat-number, .case-stat-number'); // .case-stat-number might be unused
+        statNumbers.forEach(stat => {
+            if (stat) statsObserverInstance.observe(stat);
+        });
+    }
+
+    initializeStatsObserver(); // Initialize stats observer
 
 
     // Sticky demo chat (optional: only show after some scroll)
     const demoChatWidget = document.getElementById('demoChat');
-    if (demoChatWidget) { // Check if demo chat exists
-        let scrolledPastThreshold = false;
+    if (demoChatWidget) { 
+        let scrolledPastThreshold = false; // Flag to show chat only once automatically
+        // Initially hide the chat if it's meant to appear on scroll
+        // demoChatWidget.style.display = 'none'; 
+        
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             if (scrolled > 500 && !scrolledPastThreshold) {
-                demoChatWidget.style.display = 'block'; // Or 'flex' if that's its default
-                scrolledPastThreshold = true; // Show only once automatically
+                // Check if it was hidden by default before showing
+                // if(demoChatWidget.style.display === 'none') {
+                   demoChatWidget.style.display = 'block'; // Or 'flex' if that's its default display type
+                // }
+                scrolledPastThreshold = true; 
             }
         });
     }
@@ -237,9 +295,10 @@ document.addEventListener('DOMContentLoaded', () => {
         chatTimer = setTimeout(() => {
             const demoChat = document.getElementById('demoChat');
             if (demoChat && demoChat.style.display !== 'none') {
-                // demoChat.style.opacity = '0.7'; // Example: fade it
+                // demoChat.style.opacity = '0.7'; // Example: fade it or hide it
+                // demoChat.style.display = 'none'; // Example: hide it
             }
-        }, 300000); // Increased time
+        }, 300000); // 5 minutes
     }
     
     const demoChatElementForTimer = document.getElementById('demoChat');
@@ -248,43 +307,32 @@ document.addEventListener('DOMContentLoaded', () => {
       resetChatTimer(); // Initial call
     }
 
-
-    // Price calculator example (not used by current HTML but as per original JS)
-    function calculateROI(packagePrice, monthlySavings) {
-        const monthsToBreakeven = Math.ceil(packagePrice / monthlySavings);
-        const yearlyProfit = (monthlySavings * 12) - packagePrice;
-        return { monthsToBreakeven, yearlyProfit };
-    }
-
     // Add hover effects for price cards
     document.querySelectorAll('.price-card').forEach(card => {
         card.addEventListener('mouseenter', function() {
-            if (!this.classList.contains('popular')) { // Popular has its own transform
-                this.style.transform = 'translateY(-15px) scale(1.02)';
-            }
-            this.style.boxShadow = '0 20px 40px rgba(102, 126, 234, 0.2)';
+            // The :hover styles in CSS handle this well, JS override might be complex if not matching exactly.
+            // If specific JS-driven hover effects are needed beyond CSS, implement here.
+            // For now, relying on CSS :hover and .popular:hover transforms.
         });
         
         card.addEventListener('mouseleave', function() {
-             if (!this.classList.contains('popular')) {
-                this.style.transform = 'translateY(-10px) scale(1)'; // Keep the hover effect from CSS
-             } else {
-                this.style.transform = 'translateY(-10px)'; // Popular card's base hover
-             }
-            this.style.boxShadow = ''; // Revert to CSS defined shadow or none
+            // Revert JS-driven effects if any.
         });
     });
 
     // Add click tracking for analytics (stub)
     function trackEvent(eventName, eventData) {
-        console.log('Event tracked:', eventName, eventData);
+        console.log('Analytics Event Tracked (Stub):', eventName, eventData);
         
-        if (typeof gtag !== 'undefined') {
-            // gtag('event', eventName, eventData);
-        }
-        if (typeof ym !== 'undefined') {
-            // ym(YOUR_YANDEX_METRICA_ID, 'reachGoal', eventName, eventData);
-        }
+        // Example for Google Analytics (ensure gtag is loaded)
+        // if (typeof gtag === 'function') {
+        //     gtag('event', eventName, eventData);
+        // }
+        
+        // Example for Yandex.Metrica (ensure ym is loaded and counter ID is correct)
+        // if (typeof ym === 'function') {
+        //     ym(YOUR_YANDEX_METRICA_COUNTER_ID, 'reachGoal', eventName, eventData);
+        // }
     }
 
     document.querySelectorAll('.cta-button').forEach(button => {
@@ -292,49 +340,51 @@ document.addEventListener('DOMContentLoaded', () => {
             const section = this.closest('section');
             trackEvent('cta_click', {
                 button_text: this.textContent.trim(),
-                page_section: section ? section.className || section.id : 'unknown'
+                page_section: section ? (section.className || section.id || 'unknown_section') : 'unknown_section'
             });
         });
     });
     
-    const finalCtaForm = document.querySelector('.final-cta form');
-    if (finalCtaForm) {
-        finalCtaForm.addEventListener('submit', function() {
-            const businessSelect = this.querySelector('select');
-            trackEvent('form_submit', {
+    const finalCtaFormElementForTracking = document.querySelector('.final-cta form');
+    if (finalCtaFormElementForTracking) {
+        finalCtaFormElementForTracking.addEventListener('submit', function() { // Note: this tracks on attempt, not necessarily successful simulated send
+            const businessSelect = this.elements['Сфера бизнеса'] || this.querySelector('select[required]');
+            trackEvent('form_submit_attempt', { // Changed event name for clarity
                 form_type: 'lead_form',
                 business_type: businessSelect ? businessSelect.value : 'unknown'
             });
         });
     }
 
-
-    // Add exit intent popup (optional)
+    // Add exit intent popup (optional, currently inactive)
     let exitIntentShown = false;
     document.addEventListener('mouseleave', function(e) {
-        if (e.clientY < 0 && !exitIntentShown) {
-            exitIntentShown = true; // Set flag immediately
+        if (e.clientY < 0 && !exitIntentShown) { // Check if mouse leaves to top of viewport
+            // exitIntentShown = true; // Set flag immediately to show only once
             // showExitIntentPopup(); // Call the function to show popup
         }
     });
 
-    function showExitIntentPopup() { // Definition for the popup
+    function showExitIntentPopup() { 
+        // To prevent multiple popups if this function is called again somehow
+        if (document.getElementById('exitIntentPopup')) return;
+
         const popup = document.createElement('div');
-        popup.id = 'exitIntentPopup'; // Add an ID for easier removal/check
+        popup.id = 'exitIntentPopup'; 
+        popup.style.cssText = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center;";
+        
         popup.innerHTML = `
-            <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; display: flex; align-items: center; justify-content: center;">
-                <div style="background: white; padding: 40px; border-radius: 20px; max-width: 500px; text-align: center; position: relative;">
-                    <button onclick="document.getElementById('exitIntentPopup').remove()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer;">×</button>
-                    <h3 style="color: #333; margin-bottom: 20px;">⏰ Подождите!</h3>
-                    <p style="margin-bottom: 20px;">Получите <strong>бесплатную консультацию</strong> и узнайте, как чат-бот увеличит ваши продажи на 40%</p>
-                    <p style="color: #ff6b6b; font-weight: bold; margin-bottom: 20px;">🎁 Скидка 30% только сегодня!</p>
-                    <button onclick="window.location.href='#order'; document.getElementById('exitIntentPopup').remove();" style="background: #ff6b6b; color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 16px; cursor: pointer;">
-                        Получить скидку 30%
-                    </button>
-                </div>
+            <div style="background: white; padding: 40px; border-radius: 20px; max-width: 500px; text-align: center; position: relative; color: #333;">
+                <button onclick="document.getElementById('exitIntentPopup').remove()" style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 24px; cursor: pointer; color: #888;">&times;</button>
+                <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">⏰ Подождите! Не уходите!</h3>
+                <p style="margin-bottom: 20px; font-size: 1.1em;">Получите <strong>бесплатную консультацию</strong> и узнайте, как чат-бот увеличит ваши продажи на 40%.</p>
+                <p style="color: #ff6b6b; font-weight: bold; margin-bottom: 25px; font-size: 1.2em;">🎁 Скидка 30% только сегодня!</p>
+                <button onclick="window.location.href='#order'; document.getElementById('exitIntentPopup').remove();" style="background: #ff6b6b; color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 1.1em; cursor: pointer; transition: background-color 0.3s ease;">
+                    Получить скидку 30%
+                </button>
             </div>
         `;
         document.body.appendChild(popup);
-        trackEvent('exit_intent_popup', { shown: true });
+        trackEvent('exit_intent_popup_shown', { shown: true });
     }
 });
