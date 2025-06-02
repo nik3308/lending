@@ -103,37 +103,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form submission
+// Form submission with Formspree
 const mainForm = document.querySelector('section.final-cta form');
 if (mainForm) {
+    // Formspree будет обрабатывать отправку автоматически
+    // Можно добавить только визуальные эффекты при отправке
     mainForm.addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent default browser submission
-        
-        const nameInput = this.querySelector('input[type="text"]');
-        const phoneInput = this.querySelector('input[type="tel"]');
-        const businessSelect = this.elements['Сфера бизнеса'] || this.querySelector('select[required]'); // More robust selector for business sphere
-        const clientVolumeSelect = this.elements['Обращений клиентов в день'] || this.querySelector('select:not([required])'); // More robust selector for client volume
-
-        if (nameInput && phoneInput && businessSelect) { // ClientVolumeSelect is optional
-            const name = nameInput.value;
-            const phone = phoneInput.value;
-            const business = businessSelect.value;
-            const clientVolume = clientVolumeSelect ? clientVolumeSelect.value : ""; // Handle if not found
-
-            if (name.trim() && phone.trim() && business) { 
-                
-                // IMPORTANT: GitHub Pages hosts static sites and cannot process form data or send emails directly.
-                // The data below is collected but NOT actually sent to nik3308@yandex.ru by this script.
-                // You need to use a third-party service like Formspree (formspree.io), Netlify Forms,
-                // or a custom backend to handle form submissions and send emails.
-
-                const formData = {
-                    name: name,
-                    phone: phone,
-                    businessSphere: business,
-                    clientVolumePerDay: clientVolume,
-                    submittedAt: new Date().toISOString()
-                };
+        const button = this.querySelector('button[type="submit"]');
+        button.innerHTML = '⏳ Отправляем...';
+        button.disabled = true;
+    });
+}
 
                 // For your testing, you can see the data in the browser's console:
                 console.log("Form data submitted (simulation):", formData);
