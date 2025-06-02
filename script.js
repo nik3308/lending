@@ -336,14 +336,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add exit intent popup (optional, currently inactive)
-    let exitIntentShown = false;
-    document.addEventListener('mouseleave', function(e) {
-        if (e.clientY < 0 && !exitIntentShown) { // Check if mouse leaves to top of viewport
-            // exitIntentShown = true; // Set flag immediately to show only once
-            // showExitIntentPopup(); // Call the function to show popup
-        }
-    });
+   // Add exit intent popup
+let exitIntentShown = false;
+document.addEventListener('mouseleave', function(e) {
+    if (e.clientY < 0 && !exitIntentShown) {
+        exitIntentShown = true;
+        showExitIntentPopup();
+    }
+});
 
     function showExitIntentPopup() { 
         // To prevent multiple popups if this function is called again somehow
