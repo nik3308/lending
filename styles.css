@@ -579,3 +579,115 @@ body {
         transition: none !important;
     }
 }
+/* Добавьте эти стили в конец вашего styles.css */
+
+/* Additional Styles for Animations */
+.benefit-card, .stat-card, .type-card, .process-step {
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover, .stat-card:hover, .type-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
+}
+
+/* Loading animation for form submission */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+/* Success animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.success-message {
+    animation: slideDown 0.5s ease-out;
+}
+
+/* Mobile optimizations (дополнительные стили) */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .solution-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .chat-demo {
+        max-width: 100%;
+    }
+    
+    .demo-chat {
+        width: 280px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .price-card {
+        margin-bottom: 20px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .demo-chat, .cta-button, form {
+        display: none !important;
+    }
+    
+    .hero {
+        background: #667eea !important;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .hero {
+        background: #000 !important;
+        color: #fff !important;
+    }
+    
+    .cta-button {
+        background: #fff !important;
+        color: #000 !important;
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
