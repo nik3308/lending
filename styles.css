@@ -690,4 +690,88 @@ body {
         animation: none !important;
         transition: none !important;
     }
+    /* Вставьте этот код в конец файла styles.css */
+
+/* Стили для кнопок связи */
+.contact-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0 20px;
+    flex-wrap: wrap;
+}
+
+.contact-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.contact-button svg {
+    margin-right: 10px;
+}
+
+.telegram-button {
+    background: linear-gradient(to right, #ff7675, #ff5252);
+}
+
+.telegram-button:hover {
+    background: linear-gradient(to right, #ff5252, #ff7675);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 82, 82, 0.3);
+}
+
+.email-button {
+    background: linear-gradient(to right, #2ecc71, #27ae60);
+}
+
+.email-button:hover {
+    background: linear-gradient(to right, #27ae60, #2ecc71);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+}
+
+/* Анимация появления кнопок */
+@keyframes buttonFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contact-button {
+    animation: buttonFadeIn 0.6s ease forwards;
+}
+
+.telegram-button {
+    animation-delay: 0.2s;
+}
+
+.email-button {
+    animation-delay: 0.4s;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 480px) {
+    .contact-buttons-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .contact-button {
+        width: 100%;
+    }
+}
 }
