@@ -1,204 +1,665 @@
-// Функция для FAQ
-function toggleFaq(element) {
-    const answer = element.nextElementSibling;
-    if (answer.style.display === 'block') {
-        answer.style.display = 'none';
-        element.style.background = '#f8f9fa';
-    } else {
-        // Закрываем все остальные FAQ
-        const allAnswers = document.querySelectorAll('.faq-answer');
-        const allQuestions = document.querySelectorAll('.faq-question');
-        
-        allAnswers.forEach(ans => ans.style.display = 'none');
-        allQuestions.forEach(q => q.style.background = '#f8f9fa');
-        
-        // Открываем текущий FAQ
-        answer.style.display = 'block';
-        element.style.background = '#e9ecef';
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.benefit-card {
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #ff6b6b;
+    color: white;
+    padding: 20px 40px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255,107,107,0.3);
+}
+
+/* Problem Section */
+.problem {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.problem h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #333;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.stat-card {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ff6b6b;
+    margin-bottom: 10px;
+}
+
+/* Solution Section */
+.solution {
+    padding: 80px 0;
+}
+
+.solution h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.solution-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.chat-demo {
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 400px;
+}
+
+.chat-message {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.chat-message.bot {
+    background: #667eea;
+    color: white;
+    margin-left: 20px;
+}
+
+.chat-message.user {
+    background: #e9ecef;
+    margin-right: 20px;
+}
+
+/* Types Section */
+.types {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.type-card {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.type-card:hover {
+    transform: translateY(-10px);
+}
+
+.type-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+/* Benefits Section */
+.detailed-benefits {
+    padding: 80px 0;
+}
+
+.benefits-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.benefit-item-icon {
+    background: #667eea;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+/* Pricing Section */
+.pricing {
+    padding: 80px 0;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.price-card {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.price-card:hover, .price-card.popular {
+    border-color: #667eea;
+    transform: translateY(-10px);
+}
+
+.price-card.popular::before {
+    content: 'ПОПУЛЯРНЫЙ';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #667eea;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #667eea;
+    margin: 20px 0;
+}
+
+.price-features {
+    list-style: none;
+    margin: 30px 0;
+}
+
+.price-features li {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.price-features li:before {
+    content: '✓';
+    color: #28a745;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Process Section */
+.process {
+    background: #f8f9fa;
+    padding: 80px 0;
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.process-step {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+}
+
+.step-number {
+    background: #667eea;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 20px;
+}
+
+/* FAQ Section */
+.faq {
+    padding: 80px 0;
+}
+
+.faq-item {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.faq-question {
+    background: #f8f9fa;
+    padding: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+.faq-answer {
+    padding: 20px;
+    display: none;
+}
+
+/* Final CTA */
+.final-cta {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.guarantee {
+    background: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 40px 0;
+}
+
+/* Form Styles */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+}
+
+/* Demo Chat Widget */
+.demo-chat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.chat-header {
+    background: #667eea;
+    color: white;
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.chat-body {
+    padding: 20px;
+    height: 200px;
+    overflow-y: auto;
+}
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #667eea;
+    font-style: italic;
+}
+
+.dots {
+    display: flex;
+    gap: 3px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: #667eea;
+    border-radius: 50%;
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.dot:nth-child(1) { animation-delay: -0.32s; }
+.dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+/* Additional Styles for Animations */
+.benefit-card, .stat-card, .type-card, .process-step {
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover, .stat-card:hover, .type-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
+}
+
+/* Loading animation for form submission */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+/* Success animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
 
-// Функциональность демо-чата
-let chatBody = document.getElementById('chatBody');
-let chatOpen = true;
-
-// Показать/скрыть чат
-function toggleChat() {
-    const demoChat = document.getElementById('demoChat');
-    if (demoChat) {
-        if (chatOpen) {
-            demoChat.style.height = '60px';
-            demoChat.style.overflow = 'hidden';
-        } else {
-            demoChat.style.height = 'auto';
-            demoChat.style.overflow = 'visible';
-        }
-        chatOpen = !chatOpen;
-    }
+.success-message {
+    animation: slideDown 0.5s ease-out;
 }
 
-// Обработка выбора опции в чате
-function selectOption(option) {
-    // Добавляем сообщение пользователя
-    if (chatBody) {
-        const userMessage = document.createElement('div');
-        userMessage.className = 'chat-message user';
-        userMessage.textContent = option;
-        chatBody.appendChild(userMessage);
-        
-        // Скрываем опции
-        const chatOptions = document.getElementById('chatOptions');
-        if (chatOptions) {
-            chatOptions.style.display = 'none';
-        }
-        
-        // Показываем индикатор набора текста
-        const typingIndicator = document.createElement('div');
-        typingIndicator.className = 'typing-indicator';
-        typingIndicator.innerHTML = 'Бот печатает <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
-        chatBody.appendChild(typingIndicator);
-        
-        // Прокручиваем чат вниз
-        chatBody.scrollTop = chatBody.scrollHeight;
-        
-        // Имитируем ответ бота через 1.5 секунды
-        setTimeout(() => {
-            // Удаляем индикатор набора
-            chatBody.removeChild(typingIndicator);
-            
-            // Добавляем ответ бота в зависимости от выбранной опции
-            const botMessage = document.createElement('div');
-            botMessage.className = 'chat-message bot';
-            
-            if (option === 'Интернет-магазин') {
-                botMessage.innerHTML = 'Отлично! Для интернет-магазина у нас есть специальный бот, который поможет с:<br>• Консультацией по товарам<br>• Оформлением заказов<br>• Отслеживанием доставки<br><br>Какой у вас примерный бюджет на разработку?';
-                
-                // Добавляем новые опции
-                const newOptions = document.createElement('div');
-                newOptions.id = 'chatOptions';
-                newOptions.style.marginTop = '15px';
-                newOptions.innerHTML = `
-                    <button onclick="selectOption('До 50 000₽')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">До 50 000₽</button>
-                    <button onclick="selectOption('50 000₽ - 100 000₽')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">50 000₽ - 100 000₽</button>
-                    <button onclick="selectOption('Более 100 000₽')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Более 100 000₽</button>
-                `;
-                
-                chatBody.appendChild(botMessage);
-                chatBody.appendChild(newOptions);
-            } 
-            else if (option === 'Услуги') {
-                botMessage.innerHTML = 'Для сферы услуг мы создаем ботов, которые:<br>• Записывают клиентов на прием<br>• Консультируют по вашим услугам<br>• Отвечают на частые вопросы<br><br>Сколько обращений клиентов вы получаете в день?';
-                
-                const newOptions = document.createElement('div');
-                newOptions.id = 'chatOptions';
-                newOptions.style.marginTop = '15px';
-                newOptions.innerHTML = `
-                    <button onclick="selectOption('До 10 обращений')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">До 10 обращений</button>
-                    <button onclick="selectOption('10-50 обращений')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">10-50 обращений</button>
-                    <button onclick="selectOption('Более 50 обращений')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Более 50 обращений</button>
-                `;
-                
-                chatBody.appendChild(botMessage);
-                chatBody.appendChild(newOptions);
-            } 
-            else if (option === 'Образование') {
-                botMessage.innerHTML = 'Для образовательных проектов мы разрабатываем ботов, которые:<br>• Отвечают на вопросы о курсах<br>• Помогают с записью на обучение<br>• Присылают учебные материалы<br><br>Какой тип образовательного проекта у вас?';
-                
-                const newOptions = document.createElement('div');
-                newOptions.id = 'chatOptions';
-                newOptions.style.marginTop = '15px';
-                newOptions.innerHTML = `
-                    <button onclick="selectOption('Онлайн-школа')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Онлайн-школа</button>
-                    <button onclick="selectOption('Курсы/тренинги')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Курсы/тренинги</button>
-                    <button onclick="selectOption('Репетиторство')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Репетиторство</button>
-                `;
-                
-                chatBody.appendChild(botMessage);
-                chatBody.appendChild(newOptions);
-            }
-            // Обработка ответов второго уровня
-            else if (option.includes('До 50 000₽') || option.includes('Онлайн-школа') || option.includes('До 10 обращений')) {
-                botMessage.innerHTML = 'Спасибо за информацию! Для вашего случая рекомендую "Базовый" пакет за 45 000₽.<br><br>Хотите получить коммерческое предложение на почту или проконсультироваться с нашим специалистом?';
-                
-                const newOptions = document.createElement('div');
-                newOptions.id = 'chatOptions';
-                newOptions.style.marginTop = '15px';
-                newOptions.innerHTML = `
-                    <button onclick="selectOption('Получить КП на почту')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Получить КП на почту</button>
-                    <button onclick="selectOption('Консультация специалиста')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Консультация специалиста</button>
-                `;
-                
-                chatBody.appendChild(botMessage);
-                chatBody.appendChild(newOptions);
-            }
-            else if (option.includes('50 000₽ - 100 000₽') || option.includes('Курсы/тренинги') || option.includes('10-50 обращений')) {
-                botMessage.innerHTML = 'Отличный выбор! Для вас подойдет "Продвинутый" пакет за 85 000₽ с полным функционалом и интеграциями.<br><br>Хотите получить коммерческое предложение на почту или проконсультироваться с нашим специалистом?';
-                
-                const newOptions = document.createElement('div');
-                newOptions.id = 'chatOptions';
-                newOptions.style.marginTop = '15px';
-                newOptions.innerHTML = `
-                    <button onclick="selectOption('Получить КП на почту')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Получить КП на почту</button>
-                    <button onclick="selectOption('Консультация специалиста')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Консультация специалиста</button>
-                `;
-                
-                chatBody.appendChild(botMessage);
-                chatBody.appendChild(newOptions);
-            }
-            else if (option.includes('Более 100 000₽') || option.includes('Репетиторство') || option.includes('Более 50 обращений')) {
-                botMessage.innerHTML = 'Для вашего масштаба рекомендую "Премиум" пакет за 150 000₽ с максимальными возможностями и аналитикой.<br><br>Хотите получить коммерческое предложение на почту или проконсультироваться с нашим специалистом?';
-                
-                const newOptions = document.createElement('div');
-                newOptions.id = 'chatOptions';
-                newOptions.style.marginTop = '15px';
-                newOptions.innerHTML = `
-                    <button onclick="selectOption('Получить КП на почту')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Получить КП на почту</button>
-                    <button onclick="selectOption('Консультация специалиста')" style="display: block; width: 100%; margin-bottom: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Консультация специалиста</button>
-                `;
-                
-                chatBody.appendChild(botMessage);
-                chatBody.appendChild(newOptions);
-            }
-            // Финальный этап
-            else if (option.includes('Получить КП') || option.includes('Консультация')) {
-                botMessage.innerHTML = 'Супер! Для продолжения нам нужны ваши контактные данные. Заполните, пожалуйста, форму ниже на странице, и мы свяжемся с вами в течение 2 часов.<br><br>Или вы можете написать нам прямо сейчас в <a href="https://t.me/echo1995_bot" target="_blank">Telegram</a> или на <a href="mailto:nik3308@yandex.ru">Email</a>.';
-                chatBody.appendChild(botMessage);
-            }
-            else {
-                botMessage.innerHTML = 'Спасибо за ваш ответ! Наш менеджер свяжется с вами для уточнения деталей. Также вы можете заполнить форму ниже для получения точного расчета стоимости.';
-                chatBody.appendChild(botMessage);
-            }
-            
-            // Прокручиваем чат вниз
-            chatBody.scrollTop = chatBody.scrollHeight;
-        }, 1500);
-    }
+/* СТИЛИ ДЛЯ СЕКЦИИ ОТЗЫВОВ */
+
+.testimonials {
+    padding: 80px 0;
+    background: #f5f7fa;
 }
 
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем, есть ли элементы чата на странице
-    chatBody = document.getElementById('chatBody');
+.testimonials .section-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.testimonials .section-title::before {
+    content: "☑️";
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+.testimonials .testimonial-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.testimonials .client-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.testimonials .client-icon {
+    font-size: 24px;
+    margin-right: 12px;
+}
+
+.testimonials .client-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.testimonials .task-description {
+    font-size: 14px;
+    color: #4a5568;
+    margin-bottom: 6px;
+}
+
+.testimonials .solution-description {
+    font-size: 14px;
+    color: #4a5568;
+    margin-bottom: 24px;
+}
+
+.testimonials .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.testimonials .stat-item {
+    text-align: center;
+}
+
+.testimonials .stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.testimonials .stat-label {
+    font-size: 12px;
+    color: #718096;
+    line-height: 1.3;
+}
+
+.testimonials .client-quote {
+    font-style: italic;
+    color: #4a5568;
+    font-size: 13px;
+    line-height: 1.4;
+    border-left: 3px solid #e2e8f0;
+    padding-left: 12px;
+    margin-top: 16px;
+}
+
+.testimonials .quote-author {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 { 
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    .hero p { font-size: 1.1rem; }
+    .solution-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 15px; }
     
-    // Если демо-чат есть на странице, инициализируем его
-    const demoChat = document.getElementById('demoChat');
-    if (demoChat) {
-        // Проверим, было ли уже взаимодействие с чатом в этой сессии
-        const chatInteracted = sessionStorage.getItem('chatInteracted');
-        
-        // Если не было, покажем чат через 3 секунды
-        if (!chatInteracted) {
-            setTimeout(() => {
-                demoChat.style.display = 'block';
-                chatOpen = true;
-            }, 3000);
-            
-            // Отметим, что было взаимодействие
-            sessionStorage.setItem('chatInteracted', 'true');
-        } else {
-            // Если было взаимодействие, просто покажем чат
-            demoChat.style.display = 'block';
-            chatOpen = true;
-        }
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
-});
+    
+    .solution-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .chat-demo {
+        max-width: 100%;
+    }
+    
+    .demo-chat {
+        width: 280px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .price-card {
+        margin-bottom: 20px;
+    }
+    
+    /* Testimonials responsive */
+    .testimonials .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .testimonials .stat-number {
+        font-size: 28px;
+    }
+    
+    .testimonials .testimonial-card {
+        padding: 20px 16px;
+        margin-bottom: 16px;
+    }
+    
+    .testimonials .section-title {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .demo-chat, .cta-button, form {
+        display: none !important;
+    }
+    
+    .hero {
+        background: #667eea !important;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .hero {
+        background: #000 !important;
+        color: #fff !important;
+    }
+    
+    .cta-button {
+        background: #fff !important;
+        color: #000 !important;
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
