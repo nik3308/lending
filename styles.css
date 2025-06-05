@@ -211,37 +211,163 @@ body {
     flex-shrink: 0;
 }
 
-/* Case Studies (This class is still here, but the section is removed from HTML) */
-.cases {
-    background: #f8f9fa;
+/* ==================== TESTIMONIALS SECTION ==================== */
+.testimonials {
     padding: 80px 0;
+    background: #f8f9fa;
 }
 
-.case-card { /* This style might be unused now or could be repurposed */
+.testimonials h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.testimonial-card {
     background: white;
+    padding: 35px;
     border-radius: 15px;
-    padding: 40px;
-    margin-bottom: 40px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    border-top: 4px solid #667eea;
 }
 
-.case-stats {
-    display: flex;
-    justify-content: space-around;
-    margin: 30px 0;
-    flex-wrap: wrap;
-    gap: 20px;
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
 }
 
-.case-stat {
+.testimonial-icon {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.testimonial-card h3 {
+    font-size: 1.3rem;
+    color: #2d3748;
+    margin-bottom: 5px;
+    font-weight: 600;
     text-align: center;
 }
 
-.case-stat-number {
-    font-size: 2.5rem;
-    font-weight: bold;
+.testimonial-bot-name {
+    text-align: center;
     color: #667eea;
+    font-weight: 500;
+    margin-bottom: 25px;
+    font-family: monospace;
+    font-size: 0.95rem;
 }
+
+.testimonial-problem {
+    background: #fed7d7;
+    border-left: 3px solid #e53e3e;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.testimonial-problem h4 {
+    color: #c53030;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.testimonial-problem p {
+    color: #742a2a;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.testimonial-solution {
+    background: #c6f6d5;
+    border-left: 3px solid #38a169;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.testimonial-solution h4 {
+    color: #2f855a;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.testimonial-solution p {
+    color: #22543d;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.testimonial-result {
+    background: #bee3f8;
+    border-left: 3px solid #3182ce;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.testimonial-result strong {
+    color: #2c5282;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.testimonials-stats {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.testimonials-stats h3 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.testimonials-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.testimonial-stat {
+    text-align: center;
+}
+
+.stat-number-testimonial {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffd700;
+}
+
+.stat-label-testimonial {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* ==================== END TESTIMONIALS ==================== */
 
 /* Pricing Section */
 .pricing {
@@ -398,14 +524,6 @@ body {
     font-size: 1rem;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .hero h1 { font-size: 2.5rem; }
-    .hero p { font-size: 1.1rem; }
-    .solution-grid { grid-template-columns: 1fr; }
-    .container { padding: 0 15px; }
-}
-
 /* Demo Chat Widget */
 .demo-chat {
     position: fixed;
@@ -462,127 +580,8 @@ body {
     40% { transform: scale(1); opacity: 1; }
 }
 
-/* Additional Styles for Animations (from the second style block) */
-.benefit-card, .stat-card, .type-card, .case-card, .process-step { /* .case-card might be unused */
-    transition: all 0.3s ease;
-}
-
-.benefit-card:hover, .stat-card:hover, .type-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
-}
-
-/* Loading animation for form submission */
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-}
-
-.loading {
-    animation: pulse 1.5s infinite;
-}
-
-/* Success animation */
-@keyframes slideDown {
-    from {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.success-message {
-    animation: slideDown 0.5s ease-out;
-}
-
-/* Mobile optimizations (from the second style block) */
-@media (max-width: 768px) {
-    .hero h1 { /* This rule is duplicated, ensure consistency or merge */
-        font-size: 2rem; /* Example: taking the more specific/last one if different */
-        line-height: 1.2;
-    }
-    
-    /* .benefits-grid, .solution-grid, .chat-demo, .demo-chat, .form-grid, .case-stats, .pricing-grid, .price-card styles are already defined or similar. Review for conflicts if any. */
-    /* For brevity, I am assuming they are either identical or the latter definition is preferred. */
-     .benefits-grid { /* Duplicated, ensure one definition or merge */
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .solution-grid { /* Duplicated */
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .chat-demo { /* Duplicated */
-        max-width: 100%;
-    }
-    
-    .demo-chat { /* Duplicated */
-        width: 280px;
-        bottom: 10px;
-        right: 10px;
-    }
-    
-    .form-grid { /* Duplicated */
-        grid-template-columns: 1fr;
-    }
-    
-    .case-stats { /* Duplicated */
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .pricing-grid { /* Duplicated */
-        grid-template-columns: 1fr;
-    }
-    
-    .price-card { /* Duplicated */
-        margin-bottom: 20px; /* This was not in the first block, good to keep */
-    }
-}
-
-/* Print styles */
-@media print {
-    .demo-chat, .cta-button, form {
-        display: none !important;
-    }
-    
-    .hero {
-        background: #667eea !important;
-        -webkit-print-color-adjust: exact;
-    }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .hero {
-        background: #000 !important;
-        color: #fff !important;
-    }
-    
-    .cta-button {
-        background: #fff !important;
-        color: #000 !important;
-        border: 2px solid #000;
-    }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-    }
-}
-/* Добавьте эти стили в конец вашего styles.css */
-
 /* Additional Styles for Animations */
-.benefit-card, .stat-card, .type-card, .process-step {
+.benefit-card, .stat-card, .type-card, .process-step, .testimonial-card {
     transition: all 0.3s ease;
 }
 
@@ -618,12 +617,15 @@ body {
     animation: slideDown 0.5s ease-out;
 }
 
-/* Mobile optimizations (дополнительные стили) */
+/* Responsive */
 @media (max-width: 768px) {
-    .hero h1 {
+    .hero h1 { 
         font-size: 2rem;
         line-height: 1.2;
     }
+    .hero p { font-size: 1.1rem; }
+    .solution-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 15px; }
     
     .benefits-grid {
         grid-template-columns: 1fr;
@@ -655,6 +657,29 @@ body {
     
     .price-card {
         margin-bottom: 20px;
+    }
+    
+    /* Testimonials responsive */
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .testimonials-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .testimonials-stats {
+        padding: 30px 20px;
+    }
+    
+    .testimonials-stats h3 {
+        font-size: 1.4rem;
+    }
+    
+    .stat-number-testimonial {
+        font-size: 2rem;
     }
 }
 
