@@ -1,22 +1,3 @@
-// Функциональность демо-чата
-let chatBody = document.getElementById('chatBody');
-let chatOpen = true;
-
-// Показать/скрыть чат
-function toggleChat() {
-    const demoChat = document.getElementById('demoChat');
-    if (demoChat) {
-        if (chatOpen) {
-            demoChat.style.height = '60px';
-            demoChat.style.overflow = 'hidden';
-        } else {
-            demoChat.style.height = 'auto';
-            demoChat.style.overflow = 'visible';
-        }
-        chatOpen = !chatOpen;
-    }
-}
-
 // Функция для FAQ
 function toggleFaq(element) {
     const answer = element.nextElementSibling;
@@ -34,6 +15,25 @@ function toggleFaq(element) {
         // Открываем текущий FAQ
         answer.style.display = 'block';
         element.style.background = '#e9ecef';
+    }
+}
+
+// Функциональность демо-чата
+let chatBody = document.getElementById('chatBody');
+let chatOpen = true;
+
+// Показать/скрыть чат
+function toggleChat() {
+    const demoChat = document.getElementById('demoChat');
+    if (demoChat) {
+        if (chatOpen) {
+            demoChat.style.height = '60px';
+            demoChat.style.overflow = 'hidden';
+        } else {
+            demoChat.style.height = 'auto';
+            demoChat.style.overflow = 'visible';
+        }
+        chatOpen = !chatOpen;
     }
 }
 
