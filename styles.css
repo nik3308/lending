@@ -528,3 +528,131 @@ body {
         transition: none !important;
     }
 }
+/* Добавьте эти стили в конец вашего файла styles.css для секции отзывов */
+
+/* Стили для секции с отзывами клиентов */
+.testimonials-section {
+    background: #f8f9fa;
+    padding: 80px 0;
+}
+
+.testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: #333;
+    font-weight: bold;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.15);
+}
+
+.client-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.client-icon {
+    font-size: 2.5rem;
+    margin-right: 15px;
+}
+
+.client-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.task-description, .solution-description {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.testimonial-card .stats-grid {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.testimonial-card .stat-item {
+    text-align: center;
+    flex: 1;
+    min-width: 120px;
+    margin-bottom: 20px;
+}
+
+.testimonial-card .stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 5px;
+}
+
+.testimonial-card .stat-label {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.4;
+}
+
+.client-quote {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    font-style: italic;
+    position: relative;
+    margin-top: 30px;
+}
+
+.client-quote:before {
+    content: '"';
+    font-size: 3rem;
+    color: #667eea;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    opacity: 0.2;
+}
+
+.quote-author {
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .testimonial-card {
+        padding: 30px 20px;
+    }
+    
+    .testimonial-card .stats-grid {
+        flex-direction: column;
+    }
+    
+    .client-name {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
