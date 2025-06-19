@@ -495,41 +495,6 @@ body {
     }
 }
 
-/* Print styles */
-@media print {
-    .cta-button, form {
-        display: none !important;
-    }
-    
-    .hero {
-        background: #667eea !important;
-        -webkit-print-color-adjust: exact;
-    }
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .hero {
-        background: #000 !important;
-        color: #fff !important;
-    }
-    
-    .cta-button {
-        background: #fff !important;
-        color: #000 !important;
-        border: 2px solid #000;
-    }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-    }
-}
-/* Добавьте эти стили в конец вашего файла styles.css для секции отзывов */
-
 /* Стили для секции с отзывами клиентов */
 .testimonials-section {
     background: #f8f9fa;
@@ -550,6 +515,9 @@ body {
     font-weight: bold;
 }
 
+.testimonial-card {
+    background: white;
+    border-radius:
 .testimonial-card {
     background: white;
     border-radius: 15px;
@@ -654,5 +622,39 @@ body {
     
     .section-title {
         font-size: 2rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .cta-button, form {
+        display: none !important;
+    }
+    
+    .hero {
+        background: #667eea !important;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .hero {
+        background: #000 !important;
+        color: #fff !important;
+    }
+    
+    .cta-button {
+        background: #fff !important;
+        color: #000 !important;
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
     }
 }
