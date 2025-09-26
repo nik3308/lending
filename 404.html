@@ -3,24 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Страница не найдена</title>
+    <title>404 - Страница не найдена | AI-решения</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml"> 
     <style>
-        /* CSS styles remain the same as in your previously provided 404.html file */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; }
-        .container { max-width: 600px; }
-        .error-code { font-size: 120px; font-weight: bold; line-height: 1; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        h1 { font-size: 2.5rem; margin-bottom: 20px; }
-        p { font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9; }
-        .bot-icon { font-size: 80px; margin-bottom: 30px; animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-        .buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-        .button { display: inline-block; background: white; color: #667eea; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; transition: all 0.3s ease; }
-        .button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .button.secondary { background: rgba(255,255,255,0.2); color: white; border: 2px solid white; }
-        .chat-suggestion { margin-top: 60px; padding: 30px; background: rgba(255,255,255,0.1); border-radius: 20px; }
-        .chat-suggestion h3 { margin-bottom: 15px; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            color: white; 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            padding: 20px; 
+        }
+        
+        .container { 
+            max-width: 600px; 
+        }
+        
+        .error-code { 
+            font-size: 120px; 
+            font-weight: bold; 
+            line-height: 1; 
+            margin-bottom: 20px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3); 
+        }
+        
+        h1 { 
+            font-size: 2.5rem; 
+            margin-bottom: 20px; 
+        }
+        
+        p { 
+            font-size: 1.2rem; 
+            margin-bottom: 40px; 
+            opacity: 0.9; 
+        }
+        
+        .bot-icon { 
+            font-size: 80px; 
+            margin-bottom: 30px; 
+            animation: float 3s ease-in-out infinite; 
+        }
+        
+        @keyframes float { 
+            0%, 100% { transform: translateY(0px); } 
+            50% { transform: translateY(-20px); } 
+        }
+        
+        .buttons { 
+            display: flex; 
+            gap: 20px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            margin-bottom: 40px;
+        }
+        
+        .button { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: white; 
+            color: #667eea; 
+            padding: 15px 30px; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            transition: all 0.3s ease; 
+            font-size: 1.1rem;
+        }
+        
+        .button:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+        }
+        
+        .button.telegram { 
+            background: #0088cc; 
+            color: white; 
+        }
+        
+        .button.telegram:hover {
+            background: #006fa3;
+        }
+        
+        .chat-suggestion { 
+            margin-top: 60px; 
+            padding: 30px; 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 20px; 
+            backdrop-filter: blur(10px);
+        }
+        
+        .chat-suggestion h3 { 
+            margin-bottom: 15px; 
+            color: #FFD700;
+        }
+
+        .telegram-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 80px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .button {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -31,20 +142,36 @@
         <p>Похоже, наш бот заблудился и не может найти эту страницу. Но не волнуйтесь, мы поможем вам найти то, что нужно!</p>
         
         <div class="buttons">
-            <a href="/lending/" class="button">Вернуться на главную</a>
-            <a href="/lending/#order" class="button secondary">Получить консультацию</a>
+            <a href="/" class="button">
+                🏠 Вернуться на главную
+            </a>
+            <a href="https://t.me/echo1995_bot" class="button telegram">
+                <svg class="telegram-icon" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+                </svg>
+                Написать в Telegram
+            </a>
         </div>
         
         <div class="chat-suggestion">
             <h3>💡 Кстати, знаете ли вы?</h3>
-            <p>Наш чат-бот мог бы автоматически помочь вашим клиентам найти нужную страницу и не потерять ни одного посетителя!</p>
+            <p>Наш чат-бот может автоматически помочь вашим клиентам найти нужную страницу и не потерять ни одного посетителя! Увеличьте продажи на 40% за 7 дней.</p>
         </div>
     </div>
     
     <script>
-        // Автоматический редирект через 10 секунд
+        // Автоматический редирект через 15 секунд
         setTimeout(() => {
-            window.location.href = '/lending/';
+            window.location.href = '/';
+        }, 15000);
+        
+        // Показать уведомление о предстоящем редиректе через 10 секунд
+        setTimeout(() => {
+            const suggestion = document.querySelector('.chat-suggestion');
+            suggestion.innerHTML = `
+                <h3>⏰ Автоматический переход</h3>
+                <p>Через 5 секунд вы будете перенаправлены на главную страницу...</p>
+            `;
         }, 10000);
     </script>
 </body>
