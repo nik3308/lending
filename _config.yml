@@ -1,4 +1,42 @@
-title: "Умные чат-боты для бизнеса"
-description: "Увеличьте продажи на 40% за 7 дней"
-url: "https://nik3308.github.io"
-baseurl: "/lending"
+title: "AI-решения | Чат-боты для бизнеса"
+description: "Увеличьте продажи на 40% за 7 дней с умным чат-ботом"
+url: "https://ai-reshenie.ru"
+baseurl: ""
+
+# Дополнительные настройки для SEO
+lang: ru
+timezone: Europe/Moscow
+
+# Настройки Jekyll
+markdown: kramdown
+highlighter: rouge
+safe: true
+
+# Настройки для GitHub Pages
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Исключения из сборки
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
+
+# Настройки автора
+author:
+  name: "AI-решения"
+  email: "nik3308@yandex.ru"
+  telegram: "@ONVsm"
+
+# Социальные сети
+social:
+  name: "AI-решения"
+  links:
+    - "https://t.me/echo1995_bot"
+    - "https://t.me/ONVsm"
