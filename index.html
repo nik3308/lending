@@ -1,748 +1,732 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-решения | Разработка чат-ботов для бизнеса</title>
-    <meta name="description" content="Профессиональная разработка чат-ботов для автоматизации бизнеса. Telegram-боты, интеграции с CRM, ИИ-консультанты.">
+    <title>AI-Решение | Telegram-боты для автоматизации бизнеса от 20 000₽</title>
+    <meta name="description" content="Создаём Telegram-ботов для автоматизации продаж и клиентского сервиса. Запуск за 3-21 день. Цены от 20 000₽">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+            --accent: #f59e0b;
         }
-        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: white;
+            color: var(--dark);
+            background: var(--white);
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: fixed;
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
             top: 0;
-            width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
-        
-        .nav {
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+        .logo { font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .cta-btn {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cta-btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .cta-btn-secondary { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+        .cta-btn-secondary:hover { background: var(--primary); color: var(--white); }
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; line-height: 1.2; }
+        .hero p { font-size: 20px; margin-bottom: 40px; opacity: 0.95; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        section { padding: 80px 0; }
+        .section-title { text-align: center; font-size: 36px; margin-bottom: 50px; color: var(--dark); }
+        .section-subtitle { text-align: center; font-size: 18px; color: var(--gray); max-width: 700px; margin: -30px auto 50px; }
+        .problems { background: var(--light-gray); }
+        .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .problem-card { background: var(--white); padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .problem-stat { font-size: 32px; font-weight: 700; color: #ef4444; margin-bottom: 10px; }
+        .problem-card h3 { font-size: 20px; margin-bottom: 10px; color: var(--dark); }
+        .problem-card p { color: var(--gray); font-size: 15px; }
+        .segments-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .segment-card {
+            background: var(--white);
+            border: 2px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .segment-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+        }
+        .segment-icon { font-size: 60px; margin-bottom: 20px; }
+        .segment-card h3 { font-size: 24px; margin-bottom: 15px; }
+        .segment-card ul { list-style: none; text-align: left; margin: 20px 0; }
+        .segment-card li { padding: 8px 0; color: var(--gray); }
+        .segment-card li::before { content: "✓ "; color: var(--secondary); font-weight: bold; margin-right: 8px; }
+        .segment-price { font-size: 18px; font-weight: 600; color: var(--primary); margin-top: 20px; }
+        .packages { background: var(--light-gray); }
+        .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .package-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .package-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .package-popular { border-color: var(--primary); box-shadow: 0 10px 40px rgba(37, 99, 235, 0.2); }
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--white);
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .package-icon { font-size: 50px; margin-bottom: 20px; }
+        .package-name { font-size: 28px; margin-bottom: 10px; }
+        .package-price { font-size: 42px; font-weight: 700; color: var(--primary); margin: 20px 0; }
+        .package-features { list-style: none; text-align: left; margin: 30px 0; }
+        .package-features li { padding: 12px 0; border-bottom: 1px solid var(--light-gray); color: var(--dark); }
+        .package-features li::before { content: "✓"; color: var(--secondary); font-weight: bold; margin-right: 10px; }
+        .calculator {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 80px 0;
+        }
+        .calculator h2 { text-align: center; margin-bottom: 40px; font-size: 32px; }
+        .calc-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 40px; }
+        .calc-input-group { display: flex; flex-direction: column; gap: 10px; }
+        .calc-input-group label { font-weight: 600; font-size: 16px; }
+        .calc-input-group input,
+        .calc-input-group select {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.95);
+        }
+        .calc-btn {
+            background: var(--white);
+            color: var(--primary);
+            padding: 18px 50px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+        .calc-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .calc-result {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 40px;
+            text-align: center;
+            display: none;
+        }
+        .calc-result.active { display: block; }
+        .calc-result h3 { font-size: 28px; margin-bottom: 30px; }
+        .calc-metric { margin: 20px 0; }
+        .calc-metric-value { font-size: 48px; font-weight: 700; margin: 10px 0; }
+        .calc-metric-label { font-size: 16px; opacity: 0.9; }
+        .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .process-step { text-align: center; position: relative; }
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        .process-step h3 { font-size: 20px; margin-bottom: 10px; }
+        .process-step p { color: var(--gray); }
+        .faq { background: var(--light-gray); }
+        .faq-list { max-width: 800px; margin: 0 auto; }
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .faq-question {
+            padding: 25px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background 0.3s;
         }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #0088cc;
-            text-decoration: none;
+        .faq-question:hover { background: var(--light-gray); }
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: var(--gray);
         }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 120px 0 80px;
-            position: relative;
-        }
-        
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            line-height: 1.2;
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* CTA Section */
+        .faq-item.active .faq-answer { padding: 0 30px 25px; max-height: 500px; }
+        .faq-icon { transition: transform 0.3s; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
         .cta-section {
-            background: white;
-            padding: 5rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
             text-align: center;
+            padding: 80px 20px;
         }
-        
-        .cta-section h2 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-        
-        .cta-subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 3rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* Telegram Buttons */
-        .telegram-buttons {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-        
+        .cta-section h2 { font-size: 42px; margin-bottom: 20px; }
+        .cta-section p { font-size: 20px; margin-bottom: 40px; opacity: 0.95; }
+        .cta-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
         .telegram-btn {
+            background: var(--white);
+            color: var(--primary);
+            padding: 18px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 20px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            gap: 10px;
+            transition: all 0.3s;
         }
-        
-        .telegram-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }
-        
-        .telegram-btn.primary {
-            background: linear-gradient(45deg, #0088cc, #0099dd);
-            color: white;
-            border: none;
-        }
-        
-        .telegram-btn.secondary {
-            background: white;
-            border: 3px solid #0088cc;
-            color: #0088cc;
-        }
-        
-        .telegram-btn.secondary:hover {
-            background: #0088cc;
-            color: white;
-        }
-        
-        /* Legal Notice */
-        .legal-notice {
-            background: linear-gradient(135deg, #e8f5e8, #f0f9f0);
-            border: 2px solid #28a745;
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 3rem auto;
+        .telegram-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        footer { background: var(--dark); color: var(--white); padding: 60px 0 30px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-column h4 { margin-bottom: 20px; font-size: 18px; }
+        .footer-column a { display: block; color: rgba(255,255,255,0.7); text-decoration: none; margin-bottom: 12px; transition: color 0.3s; }
+        .footer-column a:hover { color: var(--white); }
+        .footer-legal {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
             text-align: center;
-            max-width: 800px;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
         }
-        
-        .legal-notice h3 {
-            color: #28a745;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .legal-notice p {
-            color: #2d5a2d;
-            line-height: 1.6;
-        }
-        
-        /* Benefits */
-        .benefits {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-        
-        .benefit-item {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: left;
-            border-left: 5px solid #0088cc;
-            transition: transform 0.3s ease;
-        }
-        
-        .benefit-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .benefit-item h3 {
-            color: #0088cc;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-        
-        /* Stats Section */
-        .stats {
-            background: linear-gradient(135deg, #dc3545, #c82333);
-            color: white;
-            padding: 5rem 0;
-            text-align: center;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: white;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .stat-item {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #FFD700;
-            display: block;
-            margin-bottom: 1rem;
-        }
-        
-        /* Packages Section */
-        .packages {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-        }
-        
-        .packages .section-title {
-            color: #333;
-        }
-        
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .package-card {
-            background: white;
-            border-radius: 25px;
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            border-top: 5px solid #0088cc;
-        }
-        
-        .package-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-        
-        .package-card h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-        
-        .package-price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #0088cc;
-            margin: 1.5rem 0;
-        }
-        
-        .package-features {
-            list-style: none;
-            text-align: left;
-            margin: 2rem 0;
-        }
-        
-        .package-features li {
-            padding: 0.7rem 0;
-            border-bottom: 1px solid #f0f0f0;
-            position: relative;
-            padding-left: 30px;
-        }
-        
-        .package-features li:before {
-            content: "✅";
-            position: absolute;
-            left: 0;
-            color: #28a745;
-        }
-        
-        /* Why Choose Us Section */
-        .why-choose {
-            background: white;
-            padding: 5rem 0;
-        }
-        
-        .why-choose .section-title {
-            color: #333;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-        
-        .feature-item {
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-            border: 1px solid #e9ecef;
-        }
-        
-        .feature-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .feature-item h3 {
-            color: #0088cc;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        
-        /* FAQ Section */
-        .faq-section {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 5rem 0;
-        }
-        
-        .faq-section .section-title {
-            color: #333;
-        }
-        
-        .faq-grid {
-            display: grid;
-            gap: 1.5rem;
-            margin: 3rem 0;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .faq-item {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            border-left: 4px solid #0088cc;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        
-        .faq-question {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-        
-        .faq-answer {
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        /* Final CTA */
-        .final-cta {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 5rem 0;
-            text-align: center;
-        }
-        
-        .final-cta h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-        }
-        
-        .final-cta p {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
-        
-        /* Footer */
-        .footer {
-            background: #333;
-            color: white;
-            padding: 3rem 0 2rem;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-            text-align: left;
-        }
-        
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #0088cc;
-        }
-        
-        .footer-section p, .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            line-height: 1.6;
-        }
-        
-        .footer-section a:hover {
-            color: #0088cc;
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid #555;
-            padding-top: 2rem;
-            text-align: center;
-            color: #999;
-        }
-        
-        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .telegram-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .packages-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .benefits {
-                grid-template-columns: 1fr;
-            }
+            .hero h1 { font-size: 32px; }
+            .hero p { font-size: 16px; }
+            .section-title { font-size: 28px; }
+            .nav-links { display: none; }
+            .package-price { font-size: 32px; }
+            .calc-inputs { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav container">
-            <a href="#" class="logo">🤖 AI-решения</a>
-            <div>
-                <a href="https://t.me/echo1995_bot" class="telegram-btn secondary" style="padding: 8px 16px; font-size: 0.9rem;">
-                    💬 Написать в Telegram
-                </a>
-            </div>
-    </footer>
-</body>
-</html>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">AI-Решение</a>
+            <ul class="nav-links">
+                <li><a href="#segments">Отрасли</a></li>
+                <li><a href="#packages">Тарифы</a></li>
+                <li><a href="#process">Как работаем</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+            <a href="https://t.me/echo1995_bot" class="cta-btn">Написать в Telegram</a>
         </nav>
     </header>
 
-    <!-- Hero -->
     <section class="hero">
         <div class="container">
-            <h1>Увеличьте продажи на 40% с умным чат-ботом за 7 дней</h1>
-            <p>Автоматизируйте обработку заявок, консультации и продажи. Ваши клиенты получат мгновенные ответы 24/7, а вы — больше времени на развитие бизнеса</p>
+            <h1>Telegram-бот, который работает пока вы спите</h1>
+            <p>Автоматизация продаж и клиентского сервиса от 20 000₽. Ваш цифровой сотрудник, который никогда не болеет, не уходит в отпуск и обрабатывает 1000 клиентов одновременно</p>
+            <div class="hero-buttons">
+                <a href="https://t.me/echo1995_bot" class="cta-btn">Написать в Telegram</a>
+                <a href="https://t.me/ONVsm" class="cta-btn cta-btn-secondary">Связаться с менеджером</a>
+            </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
+    <section class="problems">
         <div class="container">
-            <h2>💎 Получить консультацию бесплатно</h2>
-            <p class="cta-subtitle">Свяжитесь с нами в Telegram для бесплатной консультации и расчета стоимости проекта. Это быстрее, безопаснее и удобнее!</p>
-            
-            <div class="telegram-buttons">
-                <a href="https://t.me/echo1995_bot" class="telegram-btn primary">
-                    🤖 Консультант-бот
-                </a>
-                <a href="https://t.me/ONVsm" class="telegram-btn secondary">
-                    👨‍💻 Написать менеджеру
-                </a>
-            </div>
-
-            <div class="legal-notice">
-                <h3>✅ Безопасно и законно</h3>
-                <p>Мы не собираем персональные данные через сайт. Все общение происходит в Telegram по вашей инициативе в соответствии с требованиями российского законодательства о защите персональных данных.</p>
-            </div>
-            
-            <div class="benefits">
-                <div class="benefit-item">
-                    <h3>⚡ Быстрый ответ</h3>
-                    <p>Получите консультацию в течение 1 часа в рабочее время. Мы отвечаем быстро и по делу.</p>
+            <h2 class="section-title">Узнайте себя?</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-stat">67%</div>
+                    <h3>Клиентов уходят</h3>
+                    <p>Не дождавшись ответа менеджера в течение 3 минут</p>
                 </div>
-                <div class="benefit-item">
-                    <h3>💰 Абсолютно бесплатно</h3>
-                    <p>Консультация и расчет стоимости проекта полностью бесплатны. Никаких скрытых платежей.</p>
+                <div class="problem-card">
+                    <div class="problem-stat">45%</div>
+                    <h3>Обращений ночью</h3>
+                    <p>Приходят в нерабочее время, когда менеджеры недоступны</p>
                 </div>
-                <div class="benefit-item">
-                    <h3>🎯 Персональный подход</h3>
-                    <p>Индивидуальное решение под ваши задачи и бюджет. Учитываем специфику вашего бизнеса.</p>
+                <div class="problem-card">
+                    <div class="problem-stat">80 000₽</div>
+                    <h3>Тратите на зарплаты</h3>
+                    <p>Менеджерам, которые обрабатывают типовые вопросы</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-stat">30%</div>
+                    <h3>Потенциальной выручки</h3>
+                    <p>Теряется из-за медленной реакции на заявки</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats -->
-    <section class="stats">
+    <section id="segments">
         <div class="container">
-            <h2 class="section-title">Знакомая ситуация?</h2>
-            <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9;">Клиенты задают одни и те же вопросы, менеджеры устают от рутины, а вы теряете продажи из-за медленной обработки заявок.</p>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number">73%</span>
-                    <p>клиентов покидают сайт, если не получают ответ в течение 3 минут</p>
+            <h2 class="section-title">Выберите свою отрасль</h2>
+            <p class="section-subtitle">Готовые решения под специфику вашего бизнеса</p>
+            <div class="segments-grid">
+                <div class="segment-card" onclick="location.href='services.html'">
+                    <div class="segment-icon">💇</div>
+                    <h3>Сервисный бизнес</h3>
+                    <ul>
+                        <li>Автоматическая запись 24/7</li>
+                        <li>Напоминания → -40% no-show</li>
+                        <li>Интеграция с CRM</li>
+                        <li>Программа лояльности</li>
+                    </ul>
+                    <div class="segment-price">От 50 000₽</div>
+                    <p style="color: var(--gray); font-size: 14px; margin-top: 10px;">Салоны, клиники, автосервисы</p>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">60%</span>
-                    <p>обращений приходят в нерабочее время, когда менеджеры недоступны</p>
+
+                <div class="segment-card" onclick="location.href='experts.html'">
+                    <div class="segment-icon">🎓</div>
+                    <h3>Эксперты и инфобизнес</h3>
+                    <ul>
+                        <li>AI-помощник для учеников</li>
+                        <li>Автоворонка продаж</li>
+                        <li>Приём платежей без комиссий</li>
+                        <li>Выдача контента по расписанию</li>
+                    </ul>
+                    <div class="segment-price">От 100 000₽</div>
+                    <p style="color: var(--gray); font-size: 14px; margin-top: 10px;">Онлайн-школы, коучи, консультанты</p>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number">80,000₽</span>
-                    <p>в месяц тратят на зарплаты менеджеров, обрабатывающих типовые вопросы</p>
+
+                <div class="segment-card" onclick="location.href='horeca.html'">
+                    <div class="segment-icon">🍕</div>
+                    <h3>HoReCa</h3>
+                    <ul>
+                        <li>Прием заказов без агрегаторов</li>
+                        <li>Экономия до 500 000₽/год</li>
+                        <li>QR-меню и онлайн-оплата</li>
+                        <li>Собственная база клиентов</li>
+                    </ul>
+                    <div class="segment-price">От 100 000₽</div>
+                    <p style="color: var(--gray); font-size: 14px; margin-top: 10px;">Рестораны, кафе, доставка</p>
+                </div>
+
+                <div class="segment-card" onclick="location.href='start.html'">
+                    <div class="segment-icon">💅</div>
+                    <h3>Начинающие</h3>
+                    <ul>
+                        <li>Профессиональный имидж</li>
+                        <li>Приём заявок 24/7</li>
+                        <li>Ответы на типовые вопросы</li>
+                        <li>История всех клиентов</li>
+                    </ul>
+                    <div class="segment-price">От 20 000₽</div>
+                    <p style="color: var(--gray); font-size: 14px; margin-top: 10px;">Самозанятые, мастера, фрилансеры</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="why-choose">
+    <section id="packages" class="packages">
         <div class="container">
-            <h2 class="section-title">Наше решение</h2>
-            
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">📝</div>
-                    <h3>Прием заявок</h3>
-                    <p>Собирает контакты, уточняет потребности клиента и передает готовую заявку менеджеру</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">🛒</div>
-                    <h3>Продажи</h3>
-                    <p>Консультирует по товарам, помогает выбрать и оформить заказ прямо в чате</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">❓</div>
-                    <h3>Поддержка</h3>
-                    <p>Отвечает на частые вопросы, проводит по каталогу, помогает найти нужную информацию</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">📅</div>
-                    <h3>Запись</h3>
-                    <p>Показывает свободное время, записывает на услуги, отправляет напоминания</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">💨</div>
-                    <h3>Мгновенные ответы</h3>
-                    <p>Бот мгновенно отвечает на вопросы и не дает клиенту передумать</p>
-                </div>
-                
-                <div class="feature-item">
-                    <div class="feature-icon">📊</div>
-                    <h3>Аналитика</h3>
-                    <p>Видите, какие вопросы задают клиенты, где теряете продажи и как оптимизировать процесс</p>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 3rem;">
-                <div class="telegram-buttons">
-                    <a href="https://t.me/echo1995_bot" class="telegram-btn primary">
-                        🚀 Узнать подробнее
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Packages -->
-    <section class="packages">
-        <div class="container">
-            <h2 class="section-title">Пакеты услуг</h2>
-            <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 2rem;">Выберите оптимальный пакет для вашего бизнеса. Все боты окупаются за 1-3 месяца!</p>
-            
+            <h2 class="section-title">Выберите свой пакет</h2>
+            <p class="section-subtitle">Все боты окупаются за 1-3 месяца</p>
             <div class="packages-grid">
                 <div class="package-card">
-                    <h3>Базовый</h3>
-                    <div class="package-price">85,000₽</div>
-                    <p style="margin-bottom: 1.5rem; color: #666;">Простой бот для приема заявок</p>
+                    <div class="package-icon">🌱</div>
+                    <h3 class="package-name">СТАРТ</h3>
+                    <div class="package-price">20 000₽</div>
+                    <p style="color: var(--gray);">Для начинающих</p>
                     <ul class="package-features">
-                        <li>Базовый функционал приема заявок</li>
-                        <li>5 готовых сценариев диалогов</li>
-                        <li>Интеграция с Telegram</li>
-                        <li>Базовая аналитика заявок</li>
-                        <li>1 месяц технической поддержки</li>
-                        <li>Обучение команды работе с ботом</li>
+                        <li>До 3 сценариев диалога</li>
+                        <li>10 типовых вопросов</li>
+                        <li>Приём заявок 24/7</li>
+                        <li>База клиентов</li>
+                        <li>1 месяц поддержки</li>
+                        <li>Запуск за 3-5 дней</li>
                     </ul>
+                    <a href="https://t.me/echo1995_bot" class="cta-btn">Заказать</a>
                 </div>
-                
-                <div class="package-card" style="border-top-color: #FFD700; position: relative;">
-                    <div style="position: absolute; top: -10px; right: 20px; background: #FFD700; color: #333; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">🔥 ПОПУЛЯРНЫЙ</div>
-                    <h3>Профессиональный</h3>
-                    <div class="package-price">150,000₽</div>
-                    <p style="margin-bottom: 1.5rem; color: #666;">Умный бот с ИИ и интеграциями</p>
+
+                <div class="package-card package-popular">
+                    <div class="popular-badge">Популярный</div>
+                    <div class="package-icon">💼</div>
+                    <h3 class="package-name">БИЗНЕС</h3>
+                    <div class="package-price">50 000₽</div>
+                    <p style="color: var(--gray);">Для сервисного бизнеса</p>
                     <ul class="package-features">
-                        <li>Все функции базового пакета</li>
-                        <li>Интеграция с ChatGPT/Claude</li>
-                        <li>Подключение к CRM системе</li>
-                        <li>Неограниченные сценарии диалогов</li>
-                        <li>Продвинутая аналитика и отчеты</li>
-                        <li>3 месяца технической поддержки</li>
-                        <li>Автоматическая квалификация лидов</li>
+                        <li>До 10 сценариев</li>
+                        <li>Запись на услуги</li>
+                        <li>Интеграция с CRM</li>
+                        <li>Напоминания клиентам</li>
+                        <li>Приём платежей</li>
+                        <li>2 месяца поддержки</li>
+                        <li>Запуск за 7-10 дней</li>
                     </ul>
+                    <a href="https://t.me/echo1995_bot" class="cta-btn">Заказать</a>
                 </div>
-                
+
                 <div class="package-card">
-                    <h3>Премиум</h3>
-                    <div class="package-price">250,000₽</div>
-                    <p style="margin-bottom: 1.5rem; color: #666;">Комплексное решение с полной автоматизацией</p>
+                    <div class="package-icon">🚀</div>
+                    <h3 class="package-name">ПРОФИ</h3>
+                    <div class="package-price">100 000₽</div>
+                    <p style="color: var(--gray);">Для экспертов</p>
                     <ul class="package-features">
-                        <li>Все функции профессионального пакета</li>
-                        <li>Множественные интеграции (CRM, Email, SMS)</li>
-                        <li>Персональный менеджер проекта</li>
-                        <li>Белый лейбл (бот под вашим брендом)</li>
-                        <li>Расширенная аналитика и BI-отчеты</li>
-                        <li>12 месяцев технической поддержки</li>
-                        <li>Приоритетные обновления и консультации</li>
+                        <li>AI-ассистент</li>
+                        <li>Автоворонка продаж</li>
+                        <li>Программа лояльности</li>
+                        <li>Продвинутая аналитика</li>
+                        <li>До 10 000 AI-запросов</li>
+                        <li>3 месяца поддержки</li>
+                        <li>Запуск за 10-14 дней</li>
                     </ul>
+                    <a href="https://t.me/echo1995_bot" class="cta-btn">Заказать</a>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-icon">🏢</div>
+                    <h3 class="package-name">КОРПОРАТИВНЫЙ</h3>
+                    <div class="package-price">150 000₽</div>
+                    <p style="color: var(--gray);">Полная экосистема</p>
+                    <ul class="package-features">
+                        <li>Мультифункциональная система</li>
+                        <li>Любые интеграции</li>
+                        <li>Корпоративный AI-агент</li>
+                        <li>Персональный менеджер</li>
+                        <li>До 50 000 AI-запросов</li>
+                        <li>6 месяцев поддержки</li>
+                        <li>Запуск за 14-21 день</li>
+                    </ul>
+                    <a href="https://t.me/echo1995_bot" class="cta-btn">Заказать</a>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div style="text-align: center; margin-top: 3rem;">
-                <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">
-                    <strong>💡 Пример экономии:</strong> Бот за 85,000₽ заменяет 2 менеджеров с зарплатой 40,000₽ каждый
-                </p>
-                <div class="telegram-buttons">
-                    <a href="https://t.me/echo1995_bot" class="telegram-btn primary">
-                        💬 Обсудить проект
+    <section>
+        <div class="container">
+            <div class="calculator">
+                <h2>Рассчитайте свою экономию</h2>
+                <div class="calc-inputs">
+                    <div class="calc-input-group">
+                        <label for="industry">Ваша отрасль</label>
+                        <select id="industry">
+                            <option value="service">Сервисный бизнес</option>
+                            <option value="expert">Эксперт/Инфобизнес</option>
+                            <option value="horeca">HoReCa</option>
+                            <option value="start">Начинающий</option>
+                        </select>
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="clients">Клиентов в месяц</label>
+                        <input type="number" id="clients" placeholder="100" min="10" max="10000">
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="avgCheck">Средний чек (₽)</label>
+                        <input type="number" id="avgCheck" placeholder="3000" min="500" max="500000">
+                    </div>
+                    <div class="calc-input-group">
+                        <label for="noShow">% пропущенных (no-show)</label>
+                        <input type="number" id="noShow" placeholder="20" min="0" max="100">
+                    </div>
+                </div>
+                <button class="calc-btn" onclick="calculateROI()">Рассчитать экономию</button>
+                
+                <div class="calc-result" id="calcResult">
+                    <h3>Ваш результат с AI-ботом</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 30px;">
+                        <div class="calc-metric">
+                            <div class="calc-metric-label">Экономия в месяц</div>
+                            <div class="calc-metric-value" id="savings">0₽</div>
+                        </div>
+                        <div class="calc-metric">
+                            <div class="calc-metric-label">Окупаемость</div>
+                            <div class="calc-metric-value" id="payback">0 дней</div>
+                        </div>
+                        <div class="calc-metric">
+                            <div class="calc-metric-label">ROI за год</div>
+                            <div class="calc-metric-value" id="roi">0%</div>
+                        </div>
+                    </div>
+                    <a href="https://t.me/echo1995_bot" class="cta-btn" style="margin-top: 40px; display: inline-flex;">Получить КП</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process">
+        <div class="container">
+            <h2 class="section-title">Как мы работаем</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Бесплатная консультация</h3>
+                    <p>Разбираем ваши процессы и боли. Определяем задачи для автоматизации</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Прозрачный расчёт</h3>
+                    <p>Подбираем оптимальный пакет и считаем окупаемость вашего бота</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Разработка</h3>
+                    <p>Создаём и тестируем бота под ваши задачи за 3-21 день</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Запуск и обучение</h3>
+                    <p>Внедряем, обучаем вашу команду, настраиваем аналитику</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Частые вопросы</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Сколько времени занимает разработка?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Стандартный срок разработки — 7 рабочих дней от заключения договора до запуска. Для простых ботов (пакет СТАРТ) — 3-5 дней. Для сложных проектов с множественными интеграциями (КОРПОРАТИВНЫЙ) может потребоваться до 21 дня.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Нужен ли программист для управления ботом?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Нет, не нужен. Мы создаём простой и понятный интерфейс для управления ботом. Любой сотрудник сможет изменить ответы, добавить новые вопросы или посмотреть статистику. Обучение занимает 30-60 минут.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Можно ли интегрировать с CRM?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Да, мы интегрируем бота с популярными CRM: AmoCRM, Битрикс24, HubSpot и другими. Все заявки автоматически попадают в вашу систему с полной историей диалога.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Что если бот не знает ответа на вопрос?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Бот умеет передавать сложные вопросы менеджеру и запоминает новые ситуации. Мы анализируем такие случаи и дообучаем бота, чтобы в следующий раз он справился самостоятельно.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Сколько стоит поддержка после запуска?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Первый месяц (или больше, в зависимости от пакета) поддержки включен в стоимость разработки. Далее: техподдержка — 5 000₽/месяц, расширенная поддержка с оптимизацией — 15 000₽/месяц.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Как вы обрабатываете персональные данные?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Мы не собираем персональные данные на сайте. Вся коммуникация и обработка заявок происходит в Telegram согласно 152-ФЗ "О персональных данных". Вы сами решаете, какую информацию сообщить нам в чате.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Можно ли изменить функционал после запуска?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Конечно! Вы сможете изменять ответы бота через удобный интерфейс. Сложные изменения логики мы внесём в рамках поддержки или за дополнительную плату (обсуждается индивидуально).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Начните экономить уже через неделю</h2>
+            <p>Увеличьте продажи на 40% и освободите время для развития бизнеса</p>
+            <div class="cta-buttons">
+                <a href="https://t.me/echo1995_bot" class="telegram-btn">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.654-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+                    Написать в Telegram
+                </a>
+                <a href="https://t.me/ONVsm" class="telegram-btn" style="background: transparent; border: 2px solid white; color: white;">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.654-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+                    Связаться с менеджером
+                </a>
+            </div>
+            <p style="margin-top: 30px; font-size: 14px; opacity: 0.8;">
+                Мы не собираем персональные данные на сайте. <br>
+                Вся коммуникация через Telegram согласно 152-ФЗ
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>AI-Решение</h4>
+                    <p style="color: rgba(255,255,255,0.7); line-height: 1.8;">
+                        Партнёр по цифровой трансформации малого бизнеса. 
+                        Превращаем Telegram в полноценного сотрудника вашей компании.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h4>Отрасли</h4>
+                    <a href="services.html">Сервисный бизнес</a>
+                    <a href="experts.html">Эксперты и инфобизнес</a>
+                    <a href="horeca.html">HoReCa</a>
+                    <a href="start.html">Начинающие</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Информация</h4>
+                    <a href="prices.html">Тарифы</a>
+                    <a href="cases.html">Кейсы</a>
+                    <a href="privacy-policy.html">Политика конфиденциальности</a>
+                    <a href="terms.html">Условия использования</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <a href="https://t.me/echo1995_bot">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 8px;"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.654-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+                        Telegram бот
+                    </a>
+                    <a href="https://t.me/ONVsm">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style="vertical-align: middle; margin-right: 8px;"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.654-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/></svg>
+                        Менеджер
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="faq-section">
-        <div class="container">
-            <h2 class="section-title">Частые вопросы</h2>
-            
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-question">Сколько времени займет разработка?</div>
-                    <div class="faq-answer">Стандартный срок разработки — 7 рабочих дней от заключения договора до запуска. Для сложных проектов может потребоваться до 14 дней.</div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">Нужны ли специальные знания для управления ботом?</div>
-                    <div class="faq-answer">Нет, не нужны. Мы создаем простой и понятный интерфейс. Любой сотрудник сможет изменить ответы или посмотреть статистику.</div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">Можно ли интегрировать бота с нашей CRM?</div>
-                    <div class="faq-answer">Да, мы интегрируем бота с популярными CRM: AmoCRM, Битрикс24, Salesforce, HubSpot и другими.</div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">Что если бот не знает ответа на вопрос клиента?</div>
-                    <div class="faq-answer">Бот умеет передавать сложные вопросы менеджеру и запоминает новые ситуации для дальнейшего обучения.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="final-cta">
-        <div class="container">
-            <h2>Увеличьте продажи на 40% уже в следующем месяце!</h2>
-            <p>Бесплатная консультация и расчет стоимости. Запуск за 7 дней с гарантией результата.</p>
-            
-            <div class="telegram-buttons">
-                <a href="https://t.me/echo1995_bot" class="telegram-btn primary" style="font-size: 1.3rem; padding: 25px 50px;">
-                    🚀 Начать прямо сейчас
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>AI-решения</h3>
-                    <p>Профессиональная разработка чат-ботов для автоматизации бизнеса.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Контакты</h3>
-                    <p>Телефон: +7 (981) 152-04-93</p>
-                    <p>Telegram: <a href="https://t.me/ONVsm">@ONVsm</a></p>
-                    <p>Время работы: ПН-ПТ с 9:00 до 18:00 МСК</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Услуги</h3>
-                    <p>• Разработка Telegram-ботов</p>
-                    <p>• Интеграции с CRM системами</p>
-                    <p>• Автоматизация бизнес-процессов</p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 AI-решения. Все права защищены.</p>
-                <p style="margin-top: 10px;">
-                    <strong>Связь с нами только через:</strong> 
-                    <a href="https://t.me/echo1995_bot" style="color: #0088cc;">Telegram-бот</a> | 
-                    <a href="https://t.me/ONVsm" style="color: #0088cc;">Менеджер</a>
+            <div class="footer-legal">
+                <p style="margin-bottom: 15px;">© 2025 AI-Решение. Все права защищены.</p>
+                <p style="line-height: 1.8;">
+                    Мы не собираем персональные данные на сайте. Все обращения обрабатываются через Telegram в соответствии с 152-ФЗ "О персональных данных". 
+                    Хостинг: Cloud.ru, Selectel (серверы в РФ).
                 </p>
             </div>
         </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const allItems = document.querySelectorAll('.faq-item');
+            
+            allItems.forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                }
+            });
+            
+            faqItem.classList.toggle('active');
+        }
+
+        function calculateROI() {
+            const industry = document.getElementById('industry').value;
+            const clients = parseInt(document.getElementById('clients').value) || 0;
+            const avgCheck = parseInt(document.getElementById('avgCheck').value) || 0;
+            const noShow = parseInt(document.getElementById('noShow').value) || 0;
+
+            if (clients === 0 || avgCheck === 0) {
+                alert('Пожалуйста, заполните все поля');
+                return;
+            }
+
+            const lostRevenue = (clients * (noShow / 100) * avgCheck);
+            const savedRevenue = lostRevenue * 0.7;
+            const additionalClients = Math.round(clients * 0.3);
+            const additionalRevenue = additionalClients * avgCheck;
+            const totalSavings = Math.round(savedRevenue + additionalRevenue);
+
+            let packageCost = 20000;
+            if (industry === 'service') packageCost = 50000;
+            if (industry === 'expert') packageCost = 100000;
+            if (industry === 'horeca') packageCost = 100000;
+
+            const paybackDays = Math.round((packageCost / totalSavings) * 30);
+            const yearlyROI = Math.round(((totalSavings * 12 - packageCost) / packageCost) * 100);
+
+            document.getElementById('savings').textContent = totalSavings.toLocaleString('ru-RU') + '₽';
+            document.getElementById('payback').textContent = paybackDays + ' дней';
+            document.getElementById('roi').textContent = yearlyROI + '%';
+            document.getElementById('calcResult').classList.add('active');
+
+            document.getElementById('calcResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
