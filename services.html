@@ -14,13 +14,34 @@
         }
 
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1e40af;
+            /* Основные цвета */
+            --primary-deep: #0A4D8C;
+            --primary-bright: #1E88E5;
+            --primary-light: #42A5F5;
+
+            /* Акцентные цвета */
+            --sky-light: #90CAF9;
+            --sky-pale: #BBDEFB;
+            --azure: #29B6F6;
+
+            /* Нейтральные */
+            --dark: #0D1B2A;
+            --gray-dark: #415A77;
+            --gray-light: #E0E8F0;
+            --white: #FFFFFF;
+
+            /* Градиенты */
+            --gradient-sky: linear-gradient(135deg, #1E88E5 0%, #42A5F5 50%, #90CAF9 100%);
+            --gradient-deep: linear-gradient(180deg, #0A4D8C 0%, #1E88E5 100%);
+            --gradient-infinity: linear-gradient(45deg, #29B6F6 0%, #1E88E5 50%, #0A4D8C 100%);
+            --gradient-hero: linear-gradient(180deg, #0A4D8C 0%, #1E88E5 50%, #42A5F5 100%);
+
+            /* Совместимость со старыми переменными */
+            --primary: #1E88E5;
+            --primary-dark: #0A4D8C;
             --secondary: #10b981;
-            --dark: #1e293b;
-            --gray: #64748b;
-            --light-gray: #f1f5f9;
-            --white: #ffffff;
+            --gray: #415A77;
+            --light-gray: #E0E8F0;
         }
 
         body {
@@ -79,7 +100,7 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-hero);
             color: var(--white);
             padding: 100px 0;
             text-align: center;
@@ -175,7 +196,7 @@
         }
 
         .case-study {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-sky);
             color: var(--white);
             padding: 60px 40px;
             border-radius: 20px;
@@ -374,7 +395,7 @@
         }
 
         .cta-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-sky);
             color: var(--white);
             text-align: center;
             padding: 80px 20px;
